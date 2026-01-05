@@ -6,8 +6,8 @@ This repository contains notes, examples, exercises, and practical projects to l
 
 ## Topics
 
-- Fundamentals
-- IAM (Identity & Access Management)
+- [Fundamentals](./01-fundamentals/README.md)
+- [IAM (Identity & Access Management)](./02-iam/README.md)
 - AWS CLI
 
 ## 🤝 Contributing
