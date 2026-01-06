@@ -8,7 +8,7 @@ This repository contains notes, examples, exercises, and practical projects to l
 
 - [Fundamentals](./01-fundamentals/README.md)
 - [IAM (Identity & Access Management)](./02-iam/README.md)
-- AWS CLI
+- [AWS Elastic Compute Cloud](./03-EC2/README.md)
 
 ## 🤝 Contributing
 
