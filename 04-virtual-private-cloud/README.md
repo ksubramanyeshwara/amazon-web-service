@@ -10,9 +10,9 @@
 
 - CIDR Block (Classless Inter-Domian Routing)
 - Subnets
-- Route Tables
 - Internet Gateway(IGW)
-- NAT Gateway
+- Route Tables
+- Network Access Translation(NAT) Gateway
 - Security Groups and NACLs
 
 ## CIDR block
@@ -44,10 +44,10 @@
   - Subnets do NOT automatically get internet.
   - Internet access requires:
     - Internet Gateway attached to VPC
-    - Route table entry to IGW
-    - Public IP on instance
+    - Route table entry to Internet Gateway(IGW)
+    - IGW needs a public IP to know where to send the internet’s reply.
   - Private subnet:
-    - No IGW route
+    - No Internet Gateway(IGW) route
     - No inbound internet access
 - Security Boundary Using NACLs
   - Network ACLs (NACLs) are applied at subnet level.
@@ -55,6 +55,12 @@
   - Example:
     - Allow HTTP only
     - Deny all SSH traffic
+
+## Internet Gateway(IGW)
+
+- Enables internet access for VPC resources.
+- It allows outbound internet connections while blocking unsolicited inbound internet connection.
+- A VPC can have only one attached Internet Gateway at a time.
 
 ## Route Tables
 
@@ -70,13 +76,7 @@
 - Custom Route Tables: You can create additional route tables and associate them with specific subnets for more control.
 - Routes: Each entry specifies a destination CIDR block and a target (IGW, NAT Gateway, VPC Peering, Transit Gateway, etc.).
 
-## Internet Gateway(IGW)
-
-- Enables internet access for VPC resources.
-- It allows outbound internet connections while blocking unsolicited inbound internet connection.
-- A VPC can have only one attached Internet Gateway at a time.
-
-## NAT Gateway and NAT Instance
+## Network Access Translation(NAT) Gateway and NAT Instance
 
 - Allows private subnet resources to access the internet for patching, package downloads, container pulls, or calling third‑party APIs.
 - Prevents inbound internet traffic
@@ -91,12 +91,16 @@
 
 ### Security Groups
 
-- Stateful virtual firewall for EC2 instances and other resources (e.g., RDS, Lambda ENI).
-- Operate at the instance/resource level.
+- Stateful Virtual firewall for EC2 instances and other resources (e.g., RDS, Lambda ENI).
+- Rules apply to individual instances (like EC2), not entire subnets.
 - Rules
   - Allow only (no deny rules).
   - All inbound traffic is denied by default.
   - all outbound traffic is allowed by default.
+
+> Stateful virtual firewall that remembers outgoing requests and automatically lets the "replies" back in without needing extra rules and vice-versa.
+
+> PORT 25 is blocked by default to stop people from using their servers to send millions of spam emails.
 
 ### Network Access Control Lists (NACLs):
 
@@ -104,4 +108,4 @@
 - Operate at the subnet level.
 - Rules
   - Explicit allow and deny rules, evaluated in order (by rule number).
-  - All traffic is denied by default.
+  - Allows all inbound and outbound traffic by default.
