@@ -10,6 +10,7 @@ This repository contains notes, examples, exercises, and practical projects to l
 - [IAM (Identity & Access Management)](./02-iam/README.md)
 - [AWS Elastic Compute Cloud(EC2)](./03-EC2/README.md)
 - [Virtual Private Cloud(VPC)](./04-virtual-private-cloud/README.md)
+- [Route 53](./05-route-53/README.md)
 
 ## 🤝 Contributing
 
